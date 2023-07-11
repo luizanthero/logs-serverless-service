@@ -1,0 +1,69 @@
+service: logs-serverless-service
+
+frameworkVersion: '3'
+
+useDotenv: true
+configValidationMode: warn
+
+plugins:
+  - serverless-deployment-bucket
+  - serverless-offline #needs to be last in the list
+
+provider:
+  name: aws
+  memorySize: ${env:MEMORYSIZE}
+  region: ${env:AWS_REGION}
+  runtime: nodejs18.x
+  timeout: ${env:TIMEOUT}
+  versionFunctions: true
+  stackName: serverless-${self:service}-${env:ENVIRONMENT}
+  apiGateway:
+    apiKeys:
+      - name: '${self:service}-${env:ENVIRONMENT}'
+        description: 'api key ${self:service} de ${env:ENVIRONMENT}'
+    apiKeySourceType: 'HEADER'
+    disableDefaultEndpoint: true
+  stackTags:
+    Environment: ${env:ENVIRONMENT}
+    Squad: 'serverless-examples'
+    Product: ${self:service}
+    Name: ${self:service}
+    App: ${self:service}
+    Service-Provided: lambda
+  deploymentBucket:
+    name: serverless-owner-luizanthero-${env:ENVIRONMENT}-deployment
+  environment:
+    NAME: ${self:service}
+    STAGE: ${env:ENVIRONMENT}
+    REGION: ${env:AWS_REGION}
+    NODE_ENV: ${env:NODE_ENV}
+    DYNAMODB_ENDPOINT: ${env:DYNAMODB_ENDPOINT}
+    DYNAMODB_REGION: ${env:DYNAMODB_REGION}
+
+package:
+  individually: false
+  excludeDevDependencies: true
+  patterns:
+    - node_modules/**
+    - src/**
+    - '!.github/**'
+    - '!.vscode/**'
+    - '!coverage/**'
+    - '!dist-*/**'
+    - '!dist/**'
+    - '!resources/**'
+    - '!tests/**'
+    - '!.editorconfig'
+    - '!.eslintrc.json'
+    - '!.gitignore'
+    - '!.nvmrc'
+    - '!.prettier*'
+    - '!jest.config.js'
+    - '!package.json'
+    - '!package-lock.json'
+    - '!README.md'
+    - '!serverless.yml'
+
+functions:
+  - ${file(./functions/get.functions.yml), ''}
+  - ${file(./functions/post.functions.yml), ''}

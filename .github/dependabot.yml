@@ -1,0 +1,24 @@
+version: 2
+
+registries:
+  github-artifacts-npm:
+    type: npm-registry
+    url: https://npm.pkg.github.com/
+    token: ${{ secrets.GHA_PACKAGES }}
+updates:
+  - package-ecosystem: npm
+    directory: '/'
+    schedule:
+      interval: weekly
+      days: 'tuesday'
+      time: '10:00'
+    open-pull-requests-limit: 10
+    registries:
+      - github-artifacts-npm
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+      days: 'tuesday'
+      time: '10:00'
+    open-pull-requests-limit: 10

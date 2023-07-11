@@ -1,0 +1,9 @@
+post:
+  description: 'POST Logs Registers'
+  handler: src/lambdas/post.handler
+  events:
+    - http:
+        path: /logs
+        method: post
+        cors: true
+        private: true

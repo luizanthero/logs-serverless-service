@@ -1,0 +1,55 @@
+getById:
+  description: 'GET Log Register By ID'
+  handler: src/lambdas/getById.handler
+  events:
+    - http:
+        path: /logs/{id}
+        method: get
+        request:
+          parameters:
+            paths:
+              id: true
+        cors: true
+        private: true
+
+getByType:
+  description: 'GET Log Register By Type'
+  handler: src/lambdas/getByType.handler
+  events:
+    - http:
+        path: /logs/type/{type}
+        method: get
+        request:
+          parameters:
+            paths:
+              type: true
+        cors: true
+        private: true
+
+getByEntity:
+  description: 'GET Log Register By Entity'
+  handler: src/lambdas/getByEntity.handler
+  events:
+    - http:
+        path: /logs/entity/{entity}
+        method: get
+        request:
+          parameters:
+            paths:
+              entity: true
+        cors: true
+        private: true
+
+getByKey:
+  description: 'GET Log Register By Key'
+  handler: src/lambdas/getByKey.handler
+  events:
+    - http:
+        path: /logs/key/{key}
+        method: get
+        request:
+          parameters:
+            paths:
+              key: true
+        cors: true
+        private: true
