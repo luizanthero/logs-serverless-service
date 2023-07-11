@@ -61,6 +61,20 @@ const schema = {
       .then((result) => result.Items[0])
   },
 
+  getByAuthor: async (author) => {
+    const params = {
+      TableName: schema.TABLE_NAME,
+      FilterExpression: '#author = :author',
+      ExpressionAttributeNames: { '#author': 'author' },
+      ExpressionAttributeValues: { ':author': author }
+    }
+
+    return connection.documentClient
+      .scan(params)
+      .promise()
+      .then((result) => result.Items)
+  },
+
   create: async (payload) => {
     const data = {
       id: v1(),

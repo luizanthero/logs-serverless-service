@@ -53,3 +53,17 @@ getByKey:
               key: true
         cors: true
         private: true
+
+getByAuthor:
+  description: 'GET Log Register By Key'
+  handler: src/lambdas/getByAuthor.handler
+  events:
+    - http:
+        path: /logs/author/{author}
+        method: get
+        request:
+          parameters:
+            paths:
+              author: true
+        cors: true
+        private: true

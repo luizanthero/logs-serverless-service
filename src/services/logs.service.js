@@ -33,6 +33,14 @@ const service = {
     return log
   },
 
+  getByAuthor: async (author) => {
+    const log = await schema.getByAuthor(author)
+
+    if (!log) throw Error('Log not found')
+
+    return log
+  },
+
   create: async (payload) => {
     const log = await schema.create(payload)
 

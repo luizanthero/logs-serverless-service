@@ -9,6 +9,8 @@ const controller = {
 
   getByKey: async (key) => await service.getByKey(key),
 
+  getByAuthor: async (author) => await service.getByKey(author),
+
   create: async (payload) => await service.create(payload)
 }
 
