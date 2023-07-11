@@ -1,71 +1,53 @@
-<!--
-title: 'AWS NodeJS Example'
-description: 'This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework.'
-layout: Doc
-framework: v3
-platform: AWS
-language: nodeJS
-priority: 1
-authorLink: 'https://github.com/serverless'
-authorName: 'Serverless, inc.'
-authorAvatar: 'https://avatars1.githubusercontent.com/u/13742415?s=200&v=4'
--->
+# Save Logs using Lambdas and DynamoDB
 
-# Serverless Framework AWS NodeJS Example
-
-This template demonstrates how to deploy a NodeJS function running on AWS Lambda using the traditional Serverless Framework. The deployed function does not include any event definitions as well as any kind of persistence (database). For more advanced configurations check out the [examples repo](https://github.com/serverless/examples/) which includes integrations with SQS, DynamoDB or examples of functions that are triggered in `cron`-like manner. For details about configuration of specific `events`, please refer to our [documentation](https://www.serverless.com/framework/docs/providers/aws/events/).
+This project is used to save a generic logs on a AWS DynamoDB Table using AWS API Gateway and AWS Lambdas.
 
 ## Usage
 
-### Deployment
+### Docker
 
-In order to deploy the example, you need to run the following command:
+Install Docker on your computer to use LocalStack services, to run DynamoDB Local on it -> [Install Doc](https://docs.docker.com/engine/install/)
 
-```
-$ serverless deploy
-```
+### LocalStack
 
-After running deploy, you should see output similar to:
+Install LocalStack on your computer to use AWS Services -> [Install Doc](https://docs.localstack.cloud/getting-started/installation/)
 
-```bash
-Deploying aws-node-project to stage dev (us-east-1)
+### LocalStack Usage
 
-✔ Service deployed to stack aws-node-project-dev (112s)
-
-functions:
-  hello: aws-node-project-dev-hello (1.5 kB)
-```
-
-### Invocation
-
-After successful deployment, you can invoke the deployed function by using the following command:
-
-```bash
-serverless invoke --function hello
-```
-
-Which should result in response similar to the following:
-
-```json
-{
-  "statusCode": 200,
-  "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": {}\n}"
-}
-```
-
-### Local development
-
-You can invoke your function locally by using the following command:
-
-```bash
-serverless invoke local --function hello
-```
-
-Which should result in response similar to the following:
+After install LocalStack on yout computer, execute the commands bellow.
 
 ```
-{
-    "statusCode": 200,
-    "body": "{\n  \"message\": \"Go Serverless v3.0! Your function executed successfully!\",\n  \"input\": \"\"\n}"
-}
+localstack start --detached
 ```
+
+This command will be create and start a LocalStack container on your Docker.
+
+```
+localstack status services
+```
+
+This command will be show you all AWS avaliables services on your Docker Container.
+
+### Project Usage
+
+After all install node packages.
+
+```
+npm install --save
+```
+
+After that, create DynamoDB Table, execute command bellow.
+
+```
+npm run deploy:dynamo
+```
+
+Then execute the project using command bellow.
+
+```
+npm run start
+```
+
+### Executing Endpoints
+
+Import the `./resources/insomnia.json` file on your [Insomnia](https://insomnia.rest/download)
