@@ -3,7 +3,7 @@ const { v1 } = require('uuid')
 const connection = require('../configs/dynamo.config')
 
 const schema = {
-  TABLE_NAME: `${process.env.NAME}.logs`,
+  TABLE_NAME: process.env.DYNAMODB_TABLE_NAME,
 
   getById: async (id) => {
     const params = {

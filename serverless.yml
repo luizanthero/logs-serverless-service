@@ -39,6 +39,7 @@ provider:
     NODE_ENV: ${env:NODE_ENV}
     DYNAMODB_ENDPOINT: ${env:DYNAMODB_ENDPOINT}
     DYNAMODB_REGION: ${env:DYNAMODB_REGION}
+    DYNAMODB_TABLE_NAME: ${env:DYNAMODB_TABLE_NAME}
 
 package:
   individually: false
